@@ -1,0 +1,90 @@
+<header>
+  <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="javascript:;" th:href="@{/}">Users</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main role="main">
+  <section class="my-4">
+    <div class="container">
+      <h2>User Form</h2>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <form method="post" (ngSubmit)="create()" [formGroup]="form">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name"
+                 class="form-control" placeholder="Name"
+                 formControlName="name"/>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail *</label>
+          <input type="email" id="email" name="email"
+                 class="form-control" placeholder="E-mail"
+                 formControlName="email"/>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input type="phone" id="phone" name="phone"
+                 class="form-control" placeholder="Phone"
+                 formControlName="phone"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary"
+                [disabled]="form.invalid">Create</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="mt-5">
+    <div class="container">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light text-center">
+          <tr>
+            <th>ID</th>
+
+            <th class="w-50">Name</th>
+
+            <th class="w-25">E-mail</th>
+
+            <th class="w-25">Phone</th>
+
+            <th class="w-25">Action</th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let user of users">
+            <td class="text-center w-25">{{user.id}}</td>
+
+            <td>{{user.name}}</td>
+
+            <td>{{user.email}}</td>
+
+            <td>{{user.phone}}</td>
+
+            <button id="remove" (click)="delete(user.id)">Delete</button>
+
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
