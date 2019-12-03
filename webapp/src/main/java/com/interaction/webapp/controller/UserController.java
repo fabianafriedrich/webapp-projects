@@ -26,6 +26,7 @@ public class UserController {
     public List<User> getAll(){
         return userService.listAll();
     }
+
     /*HTTP post methods to persist user*/
     @PostMapping("/add")
     public User add(@RequestBody @Valid User user){
