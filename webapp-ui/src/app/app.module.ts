@@ -8,11 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppService } from './app.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
