@@ -3,11 +3,7 @@
     <div class="container">
       <a class="navbar-brand" href="javascript:;">Users</a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <li style="cursor: pointer" (click)="logout()">Logout</li>
     </div>
   </nav>
 </header>
@@ -78,9 +74,9 @@
 
             <td>{{user.phone}}</td>
 
-            <button id="remove" (click)="delete(user.id)">Delete</button>
-
-
+            <button id="remove" (click)="delete(user.id)" title="Remove">
+              <i class="fa fa-trash"></i>
+            </button>
           </tr>
           </tbody>
         </table>

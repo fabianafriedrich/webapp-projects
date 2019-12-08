@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppService} from "../app.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -12,10 +13,13 @@ export class UserComponent implements OnInit {
   users: Array<any>;
   form: FormGroup;
 
-  constructor(private service: AppService, private formBuilder: FormBuilder) {
+  constructor(private service: AppService, private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit() {
+    if( !localStorage.getItem('auth') ){
+      this.router.navigate(['/login']);
+    }
     this.formConfig();
     this.listAll();
   }
@@ -31,7 +35,6 @@ export class UserComponent implements OnInit {
   create() {
     this.service.create(this.form.value).subscribe(result => {
       this.users.push(result);
-
       this.form.reset();
     });
   }
@@ -45,5 +48,10 @@ export class UserComponent implements OnInit {
   listAll(){
     this.service.listAll()
       .subscribe(result => this.users = result);
+  }
+
+  logout(){
+    localStorage.removeItem('auth')
+    this.router.navigate(['/login'])
   }
 }

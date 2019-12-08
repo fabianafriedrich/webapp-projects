@@ -11,25 +11,37 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   listAll() {
-    return this.http.get<Array<any>>(this.baseUrl);
+    return this.http.get<Array<any>>(this.baseUrl, this.getHeaders(localStorage.getItem('auth')));
   }
 
   create(user: any) {
-    return this.http.post(this.baseUrl + '/add', user);
+    return this.http.post(this.baseUrl + '/add', user, this.getHeaders(localStorage.getItem('auth')));
   }
 
   delete(id: any) {
-    return this.http.delete(this.baseUrl + '/' +id);
+    return this.http.delete(this.baseUrl + '/'+id, this.getHeaders(localStorage.getItem('auth')));
   }
 
-  login(username: any, password:any){
-    const httpOptions = {
+  getHeaders(auth){
+    return {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + btoa(username + ':' + password),
+        'Authorization': auth
       })
     };
-    debugger;
-    return this.http.get(this.baseUrl, httpOptions);
+  }
+
+  login(username:any, password:any){
+    const auth = 'Basic ' + btoa(username + ':' + password)
+    const request = this.http.get(this.baseUrl, this.getHeaders(auth));
+    request.subscribe(
+      data => {
+        localStorage.setItem('auth', auth);
+      },
+      error => {
+        localStorage.removeItem('auth');
+
+      })
+    return request;
   }
 }

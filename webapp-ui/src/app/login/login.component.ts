@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppService} from "../app.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {debounce} from "rxjs/operators";
 
 
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private service: AppService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private service: AppService, private formBuilder: FormBuilder, private router: Router,private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    debugger;
       (this.service.login(this.values.username.value, this.values.password.value).subscribe(
         data => {
           this.router.navigate(['/users'])
