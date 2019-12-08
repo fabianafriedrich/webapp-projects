@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class AppService {
 
-  baseUrl = 'http://localhost:8080/users';
+  baseUrl = 'http://0.0.0.0:8080/users';
 
   constructor(private http: HttpClient) { }
 
