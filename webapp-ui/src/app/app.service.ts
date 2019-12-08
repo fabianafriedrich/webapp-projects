@@ -8,8 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 /*Service layer to communicate with the API back-end by JSON*/
 export class AppService {
 
-  baseUrl = 'https://0.0.0.0:8443/users';
-
+  baseUrl = 'http://0.0.0.0:8080/users';
 
   constructor(private http: HttpClient) { }
 
