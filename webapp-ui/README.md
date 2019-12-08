@@ -1,5 +1,11 @@
 # How to run
 
+Requirements:
+
+- Maven
+
+- NodeJS
+
 #Clone project
 git clone https://github.com/fabianafriedrich/webapp-projects.git
 
@@ -25,3 +31,7 @@ java -jar target/*.jar
 
 #Access the project using the URL below:
 http://localhost:4200
+
+#To login page use:
+username: admin
+password: admin
