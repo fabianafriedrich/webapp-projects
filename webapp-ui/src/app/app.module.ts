@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 
 
+/*Imports that has being used*/
 @NgModule({
   declarations: [
     AppComponent,

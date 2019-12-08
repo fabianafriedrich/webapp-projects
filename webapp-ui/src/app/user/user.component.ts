@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 
+/*User component typescript file*/
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -24,6 +25,7 @@ export class UserComponent implements OnInit {
     this.listAll();
   }
 
+  /*Form fields validation*/
   formConfig() {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
@@ -32,6 +34,7 @@ export class UserComponent implements OnInit {
     });
   }
 
+  /*Creating new user*/
   create() {
     this.service.create(this.form.value).subscribe(result => {
       this.users.push(result);
@@ -39,17 +42,20 @@ export class UserComponent implements OnInit {
     });
   }
 
+  /*Delete user by id*/
   delete(id) {
     this.service.delete(id).subscribe(result => {
       this.listAll();
     });
   }
 
+  /*List all users*/
   listAll(){
     this.service.listAll()
       .subscribe(result => this.users = result);
   }
 
+  /*Logout of the system*/
   logout(){
     localStorage.removeItem('auth')
     this.router.navigate(['/login'])
