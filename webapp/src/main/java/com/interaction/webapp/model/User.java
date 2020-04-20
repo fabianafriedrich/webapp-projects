@@ -1,29 +1,28 @@
 package com.interaction.webapp.model;
 
-
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 
-/*Entity layer object, relation model */
-@Data //Getter and setters from lombok
-@Entity
-@Table(name = "user")
+/*Model layer*/
+//Getter and setters from lombok
+@Data
+@Document(collection = "user")
 public class User {
+
 /*Attributs*/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(name ="name")
     private String name;
 
-    @Column(name ="email")
+    @Indexed(unique = true)
     private String email;
 
-    @Column(name ="phone")
     private String phone;
 
     /*Constructors*/

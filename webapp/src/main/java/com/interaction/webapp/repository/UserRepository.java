@@ -1,11 +1,11 @@
 package com.interaction.webapp.repository;
 
 import com.interaction.webapp.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 
-/*Interface layer to interact with the database
-* Using all the methods from Jpa Repository*/
-public interface UserRepository extends JpaRepository<User, Long>{
+/*Interface layer to interact with the NOSQL database
+* Using all the methods from Mongo Repository*/
+public interface UserRepository extends MongoRepository<User, String> {
 
 }

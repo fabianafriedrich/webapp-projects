@@ -12,7 +12,7 @@ import java.util.List;
 
 /*Controller/Resources Layer to handle all the request that come from the UI*/
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/user")
 public class UserController {
 
     /*Spring Dependence Injection */
@@ -40,7 +40,7 @@ public class UserController {
 
     /*HTTP Delete methods delete user*/
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity delete(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable String id){
         userService.delete(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
