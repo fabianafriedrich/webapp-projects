@@ -27,8 +27,15 @@ public class UserController {
 
     /*HTTP post methods to persist user*/
     @PostMapping("/add")
-    public User add(@RequestBody @Valid User user){
-        return userService.save(user);
+    public ResponseEntity<User> add(@RequestBody @Valid User user){
+        userService.save(user);
+        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+    }
+    /*HTTP post methods to persist user*/
+    @PutMapping("/update")
+    public ResponseEntity<User> update(@RequestBody @Valid User user){
+        userService.save(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     /*HTTP Delete methods delete user*/
@@ -37,4 +44,5 @@ public class UserController {
         userService.delete(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
 }

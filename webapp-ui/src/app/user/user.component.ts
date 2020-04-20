@@ -14,6 +14,9 @@ export class UserComponent implements OnInit {
   users: Array<any>;
   form: FormGroup;
 
+  action = null;
+  formData: any;
+
   constructor(private service: AppService, private formBuilder: FormBuilder, private router: Router) {
   }
 
@@ -34,12 +37,32 @@ export class UserComponent implements OnInit {
     });
   }
 
+  /*Populate form to update*/
+  updateItem(user) {
+    this.action = 'update';
+    this.form = this.formBuilder.group({
+      id: [user.id],
+      name: [user.name, Validators.required],
+      email: [user.email, [Validators.required, Validators.email]],
+      phone: [user.phone, Validators.required]
+    });
+  }
+
   /*Creating new user*/
   create() {
-    this.service.create(this.form.value).subscribe(result => {
-      this.users.push(result);
-      this.form.reset();
-    });
+    debugger;
+    if (this.action === 'update'){
+      this.service.update(this.form.value).subscribe(result => {
+        this.form.reset();
+        this.action = null;
+        this.listAll();
+      });
+    }else {
+      this.service.create(this.form.value).subscribe(result => {
+        this.users.push(result);
+        this.form.reset();
+      });
+    }
   }
 
   /*Delete user by id*/

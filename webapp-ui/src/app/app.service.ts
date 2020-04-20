@@ -17,10 +17,16 @@ export class AppService {
     return this.http.get<Array<any>>(this.baseUrl, this.getHeaders(localStorage.getItem('auth')));
   }
 
-  /*Post to great new user*/
+  /*Post to create new user*/
   create(user: any) {
     return this.http.post(this.baseUrl + '/add', user, this.getHeaders(localStorage.getItem('auth')));
   }
+
+  /*Put to update new user*/
+  update(user: any) {
+    return this.http.put(this.baseUrl + '/update', user, this.getHeaders(localStorage.getItem('auth')));
+  }
+
   /*Deleting from API by Id*/
   delete(id: any) {
     return this.http.delete(this.baseUrl + '/'+id, this.getHeaders(localStorage.getItem('auth')));
