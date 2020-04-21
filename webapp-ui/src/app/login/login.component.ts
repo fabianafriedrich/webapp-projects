@@ -13,6 +13,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  isSubmitted = false;
+  validLogin = false;
 
   constructor(private service: AppService, private formBuilder: FormBuilder, private router: Router,private route: ActivatedRoute) {
   }
@@ -33,15 +35,18 @@ export class LoginComponent implements OnInit {
 
   }
 
-  /*IMplemantion login functionality and if OK is going to be redirected to the users page*/
+  /*Implementation login functionality and if OK is going to be redirected to the users page*/
   login() {
-      (this.service.login(this.values.username.value, this.values.password.value).subscribe(
-        data => {
-          this.router.navigate(['/users'])
-        },
-        error => {
-          return false;
-         }
-      ));
+    this.isSubmitted = true;
+    (this.service.login(this.values.username.value, this.values.password.value).subscribe(
+      data => {
+        this.router.navigate(['/users'])
+        this.validLogin = true;
+
+      },
+      error => {
+        return false;
+      }
+    ));
   }
 }

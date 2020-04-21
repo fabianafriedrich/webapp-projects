@@ -18,20 +18,34 @@
       <form method="post" (ngSubmit)="login()" [formGroup]="form">
         <div class="form-group">
           <label for="username">Username *</label>
-          <input type="text" id="username" name="username"
-                 class="form-control" placeholder="Username"
-                 formControlName="username"/>
+          <p [ngClass]="{ 'has-error': isSubmitted && values.username.errors }">
+            <input type="text" id="username" name="username"
+                   class="form-control" placeholder="Username"
+                   formControlName="username" required/>
+          </p>
+          <div *ngIf="isSubmitted && values.username.errors" class="help-block">
+            <div *ngIf="values.username.errors.required">Username is required</div>
+          </div>
+
         </div>
 
         <div class="form-group">
           <label for="password">Password *</label>
+          <p [ngClass]="{ 'has-error': isSubmitted && values.password.errors }">
           <input type="password" id="password" name="password"
                  class="form-control" placeholder="Password"
-                 formControlName="password" />
+                 formControlName="password" required/>
+          </p>
+          <div *ngIf="isSubmitted && values.password.errors" class="help-block">
+            <div *ngIf="values.password.errors.required">Password is required</div>
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-primary"
-                [disabled]="form.invalid">Login</button>
+        <div *ngIf="isSubmitted && !validLogin" class="help-block">
+          <div>Invalid Credentials</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </div>
   </section>

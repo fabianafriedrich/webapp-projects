@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {throwError} from "rxjs";
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 /*Service layer to communicate with the API back-end by JSON*/
 export class AppService {
 
-  baseUrl = 'http://0.0.0.0:8080/users';
+  baseUrl = 'http://0.0.0.0:8080/user';
 
   constructor(private http: HttpClient) { }
 
@@ -55,4 +56,5 @@ export class AppService {
       })
     return request;
   }
+
 }
