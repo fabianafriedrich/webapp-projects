@@ -35,6 +35,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  messageTimeout() {
+    setTimeout (() => {
+      console.log('test');
+    }, 2000);
+  }
+
   /*Implementation login functionality and if OK is going to be redirected to the users page*/
   login() {
     this.isSubmitted = true;
@@ -45,6 +51,7 @@ export class LoginComponent implements OnInit {
 
       },
       error => {
+        this.messageTimeout();
         return false;
       }
     ));

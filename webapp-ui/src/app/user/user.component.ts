@@ -13,9 +13,10 @@ export class UserComponent implements OnInit {
 
   users: Array<any>;
   form: FormGroup;
+  save = false;
+
 
   action = null;
-  formData: any;
 
   constructor(private service: AppService, private formBuilder: FormBuilder, private router: Router) {
   }
@@ -27,6 +28,8 @@ export class UserComponent implements OnInit {
     this.formConfig();
     this.listAll();
   }
+  /*Get all the values from the user form*/
+  get values() { return this.form.controls; }
 
   /*Form fields validation*/
   formConfig() {
@@ -50,26 +53,37 @@ export class UserComponent implements OnInit {
 
   /*Creating new user*/
   create() {
-    debugger;
-    if (this.action === 'update'){
-      this.service.update(this.form.value).subscribe(result => {
-        this.form.reset();
-        this.action = null;
-        this.listAll();
-      });
-    }else {
-      this.service.create(this.form.value).subscribe(result => {
-        this.users.push(result);
-        this.form.reset();
-      });
+    this.save = true;
+    if (this.form.valid) {
+      if (this.action === 'update'){
+        this.service.update(this.form.value).subscribe(result => {
+            this.save = false;
+            this.form.reset();
+            this.action = null;
+            this.listAll();
+          },
+          error => {
+            return false;
+          });
+      }else {
+        this.service.create(this.form.value).subscribe(result => {
+            this.save = false;
+            this.users.push(result);
+            this.form.reset();
+          },
+          error => {
+            return false;
+          });
+      }
     }
+
   }
 
   /*Delete user by id*/
   delete(id) {
-    this.service.delete(id).subscribe(result => {
-      this.listAll();
+    this.service.delete(id).subscribe(() => {
     });
+    this.listAll();
   }
 
   /*List all users*/
