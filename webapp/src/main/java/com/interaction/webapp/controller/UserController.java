@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    /*Spring Dependence Injection */
+    /*Spring Dependence Injection Autowired*/
     @Autowired
     private UserService userService;
 
