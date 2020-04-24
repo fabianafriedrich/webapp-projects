@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppService} from "../app.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {invalid} from "@angular/compiler/src/render3/view/util";
 
 /*Login component typescript file*/
 @Component({
@@ -51,8 +52,7 @@ export class LoginComponent implements OnInit {
 
       },
       error => {
-        this.messageTimeout();
-        return false;
+        this.form.controls['username'].setErrors({invalid: true});
       }
     ));
   }

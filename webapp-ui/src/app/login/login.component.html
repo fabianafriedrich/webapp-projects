@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <div *ngIf="isSubmitted && !validLogin" class="help-block">
+        <div [hidden]="!values.username.errors.invalid" class="help-block">
           <div>Invalid Credentials</div>
         </div>
 
