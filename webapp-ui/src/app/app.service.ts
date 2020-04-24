@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {throwError} from "rxjs";
+import {environment} from "../environments/environment";
 
 
 @Injectable({
@@ -9,9 +9,11 @@ import {throwError} from "rxjs";
 /*Service layer to communicate with the API back-end by JSON*/
 export class AppService {
 
-  baseUrl = 'http://0.0.0.0:8080/user';
+  baseUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.apiUrl}/user`;
+  }
 
   /*Get users from the API passing the auth token by parameter */
   listAll() {

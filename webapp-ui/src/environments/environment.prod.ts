@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl:'https://cct-iwa-webapp-api.herokuapp.com'
 };
